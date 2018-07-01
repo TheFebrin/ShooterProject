@@ -33,8 +33,8 @@ private:
     bool isAlive;
     
     unsigned int row;
+    
 private:
-    Animation animation;
-    RectangleShape body;
+     Animation animation;
 };
 

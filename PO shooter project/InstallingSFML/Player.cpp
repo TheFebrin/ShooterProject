@@ -3,14 +3,14 @@
 Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float height, float width)
 :animation(texture, imageCount, switchTime)
 {
-    
     Health = 100;
     PlayerSpeed = 980.f;
     row = 0;
     
+    PlayerSize.x = width; PlayerSize.y = height;
     body.setSize(Vector2f(width, height));
     body.setOrigin(body.getSize() / 2.0f);
-    body.setPosition(205.f, 205.f);
+    body.setPosition(1500.f, 1000.f);
     body.setTexture(texture);
 }
 
@@ -75,4 +75,8 @@ void Player::LowerHealth(int n){
 
 int Player::GetHealth(){
     return Health;
+}
+
+Vector2f Player::GetPlayerSize(){
+    return PlayerSize;
 }

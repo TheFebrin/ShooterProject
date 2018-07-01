@@ -22,6 +22,7 @@ public:
     void DrawPlayer(RenderWindow &win);
     
     Vector2f GetPlayerPosition();
+    Vector2f GetPlayerSize();
     Collider GetCollider();
     
     int GetPlayerDir();
@@ -32,6 +33,7 @@ private:
     float PlayerSpeed;
     int direction;
     
+    Vector2f PlayerSize;
     RectangleShape body;
     Animation animation;
     Texture PlayerTexture;

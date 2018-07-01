@@ -8,6 +8,8 @@
 #include<vector>
 #include<cstdlib>
 
+#include "Animation.h"
+
 using namespace sf;
 
 class Entity

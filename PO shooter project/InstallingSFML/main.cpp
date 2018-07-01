@@ -28,7 +28,7 @@ int main()
 {
     int counter = 0;
     float deltaTime = 0.0f;
-    Clock clock, BulletClock;
+    Clock clock, BulletClock, EnemyAtackClock;
     
     //WINDOW
     RenderWindow window(VideoMode(ScreenX, ScreenY), "Shooter", Style::Close | Style::Resize);
@@ -40,6 +40,12 @@ int main()
     mapTexture.loadFromFile(resourcePath() + "Images/map.jpg");
     Sprite Map(mapTexture);
     
+    //TEXT
+    Font font; font.loadFromFile(resourcePath() + "Fonts/sansation.ttf");
+    TextDisplay HealthText;
+    HealthText.text.setFont(font);
+    std::vector<TextDisplay> TextToDisplay;
+   
     //PLAYER
     Texture playerTexture; //-----------------------------------------------------------CREATING PLAYER
     playerTexture.loadFromFile(resourcePath() + "Images/PlayerSprite.png");
@@ -93,7 +99,7 @@ int main()
         }
        
         Time BulletTimer = BulletClock.getElapsedTime();
-        if (Keyboard::isKeyPressed(Keyboard::Space) and BulletTimer.asSeconds()>= 0.8){ //--------------CREATING BULLETS
+        if (Keyboard::isKeyPressed(Keyboard::Space) and BulletTimer.asSeconds() >= 0.8){ //--------------CREATING BULLETS
             Bullet bullet(10.0f, player.GetPlayerPosition().x, player.GetPlayerPosition().y, player.GetPlayerDir(), counter);
             Bullets.push_back(bullet);
             BulletClock.restart();
@@ -104,16 +110,23 @@ int main()
         srand(time(NULL));
         for(auto &e : Enemies)e.Update(deltaTime, player);
         for(auto &b : Bullets)b.Update(deltaTime);
+        for(auto &t : TextToDisplay)t.Update();
         
         //COLLISION
+        Time EnemyAtacksPlayer = EnemyAtackClock.getElapsedTime();
         LeftBorder.GetCollider().CheckCollision(player.GetCollider(), 1.f);
         RightBorder.GetCollider().CheckCollision(player.GetCollider(), 1.f);
         Botborder.GetCollider().CheckCollision(player.GetCollider(), 1.f);
         TopBorder.GetCollider().CheckCollision(player.GetCollider(), 1.f);
+        
         for(auto &e: Enemies){  //---------------------------------------------------COLLISION FOR ALL ENEMIES
             
-            if(e.GetCollider().CheckCollision(player.GetCollider(), 0.5f)){
+            if(e.GetCollider().CheckCollision(player.GetCollider(), 0.5f) and EnemyAtacksPlayer.asSeconds() >= 0.6){
                 player.LowerHealth(e.GetDamage());
+                HealthText.text.setPosition(player.GetPlayerPosition().x - player.GetPlayerSize().x / 2, player.GetPlayerPosition().y - player.GetPlayerSize().y / 2);
+                HealthText.text.setString(std::to_string(e.GetDamage()));
+                TextToDisplay.push_back(HealthText);
+                EnemyAtackClock.restart();
             }
             
             LeftBorder.GetCollider().CheckCollision(e.GetCollider(), 1.f);
@@ -138,10 +151,15 @@ int main()
         player.DrawPlayer(window);
         LeftBorder.Draw(window);  TopBorder.Draw(window); Botborder.Draw(window); RightBorder.Draw(window);
        
-        for(auto &e : Enemies)e.Draw(window); //-------------------DRAW ENEMIES
-        for (unsigned int i = 0; i < Bullets.size(); i++) {  //------------------DRAW BULLETS
-            if (Bullets[i].creationTime + Bullets[i].lifeTime < counter)Bullets.erase(Bullets.begin() + i);
+        for(auto &e : Enemies)e.Draw(window); //---------------------------------DRAW ENEMIES
+        
+        for (unsigned int i = 0; i < Bullets.size(); i++) {  //------------------DRAW / ERASE BULLETS
+            if (Bullets[i].ToDestroy())Bullets.erase(Bullets.begin() + i);
             else Bullets[i].DrawBullet(window);
+        }
+        for(unsigned int i=0; i < TextToDisplay.size(); i++){ //-------------------------DRAW / ERASE TEXT
+            if(TextToDisplay[i].ToDestroy())TextToDisplay.erase(TextToDisplay.begin() + i);
+            else TextToDisplay[i].DrawText(window);
         }
         
         window.display();

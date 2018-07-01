@@ -3,6 +3,7 @@
 Enemy::Enemy(Texture* texture, Vector2u imageCount, float switchTime, int xPos, int yPos)
 :animation(texture, imageCount, switchTime)
 {
+    Damage = 10;
     Health = 100;
     Speed = 100.f;
     row = 0;
