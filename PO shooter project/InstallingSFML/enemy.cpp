@@ -4,7 +4,7 @@ Enemy::Enemy(Texture* texture, Vector2u imageCount, float switchTime, int xPos, 
 :animation(texture, imageCount, switchTime)
 {
     Damage = 10;
-    Health = 100;
+    Health = 4;
     Speed = 100.f;
     row = 0;
     body.setSize(Vector2f(50.f, 75.f));

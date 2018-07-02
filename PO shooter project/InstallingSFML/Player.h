@@ -1,4 +1,6 @@
 #pragma once
+#ifndef Player_h
+
 #include<iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -43,3 +45,4 @@ private:
     
 };
 
+#endif

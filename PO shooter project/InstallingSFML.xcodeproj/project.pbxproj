@@ -19,6 +19,7 @@
 		CA21091E1B7AABFD009AAEAE /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA21091D1B7AABFD009AAEAE /* main.cpp */; };
 		CA21093C1B7AC7D2009AAEAE /* Player.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CA21093A1B7AC7D2009AAEAE /* Player.cpp */; };
 		CAE333ED1B7B021500299126 /* enemy.cpp in Sources */ = {isa = PBXBuildFile; fileRef = CAE333EB1B7B021500299126 /* enemy.cpp */; };
+		D74D046020EADF4400A14738 /* HUD.cpp in Sources */ = {isa = PBXBuildFile; fileRef = D74D045E20EADF4400A14738 /* HUD.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -45,6 +46,8 @@
 		CA21093B1B7AC7D2009AAEAE /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		CAE333EB1B7B021500299126 /* enemy.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = enemy.cpp; sourceTree = "<group>"; };
 		CAE333EC1B7B021500299126 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
+		D74D045E20EADF4400A14738 /* HUD.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HUD.cpp; sourceTree = "<group>"; };
+		D74D045F20EADF4400A14738 /* HUD.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HUD.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,10 +93,12 @@
 				937DEB5720E6832F006EF765 /* Collider.cpp */,
 				93A0A0F020E90B760067D87A /* TextDisplay.hpp */,
 				93A0A0F120E90B760067D87A /* TextDisplay.cpp */,
+				D74D045F20EADF4400A14738 /* HUD.hpp */,
+				D74D045E20EADF4400A14738 /* HUD.cpp */,
 				CA2109381B7AC764009AAEAE /* Entity.h */,
 				93A0A0EE20E90B2B0067D87A /* Entity.cpp */,
-				937DEB6020E68486006EF765 /* Platform.cpp */,
 				937DEB6120E68486006EF765 /* Platform.h */,
+				937DEB6020E68486006EF765 /* Platform.cpp */,
 				93A0A0EB20E90ABB0067D87A /* ResourcePath.hpp */,
 				93A0A0EC20E90ABB0067D87A /* ResourcePath.mm */,
 				CA21091F1B7AABFD009AAEAE /* Resources */,
@@ -206,6 +211,7 @@
 			files = (
 				937DEB6220E68486006EF765 /* Platform.cpp in Sources */,
 				937DEB5C20E683B3006EF765 /* Bullet.cpp in Sources */,
+				D74D046020EADF4400A14738 /* HUD.cpp in Sources */,
 				CA21093C1B7AC7D2009AAEAE /* Player.cpp in Sources */,
 				93A0A0F220E90B770067D87A /* TextDisplay.cpp in Sources */,
 				937DEB5F20E683F5006EF765 /* Animation.cpp in Sources */,

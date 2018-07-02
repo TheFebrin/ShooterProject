@@ -1,5 +1,4 @@
 #include<iostream>
-#include<iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include<SFML/Window.hpp>
@@ -15,6 +14,7 @@
 #include "Entity.h"
 #include "Bullet.h"
 #include "TextDisplay.hpp"
+#include "HUD.hpp"
 
 using namespace sf;
 
@@ -35,13 +35,17 @@ int main()
     View view(Vector2f(0, 0), Vector2f((float)ScreenX, (float)ScreenY));
     window.setFramerateLimit(120);
     
+    //HUD
+    HUD hud;
+    Font font; font.loadFromFile(resourcePath() + "Fonts/sansation.ttf"); //--- GAME FONT
+    hud.text.setFont(font);
+    
     //MAP
     Texture mapTexture;
     mapTexture.loadFromFile(resourcePath() + "Images/map.jpg");
     Sprite Map(mapTexture);
     
-    //TEXT
-    Font font; font.loadFromFile(resourcePath() + "Fonts/sansation.ttf");
+    //DISPLAY TEXT
     TextDisplay PlayerHealthText, EnemyHealthText;
     PlayerHealthText.text.setFont(font);
     EnemyHealthText.text.setFont(font); EnemyHealthText.text.setColor(Color::Blue);
@@ -71,6 +75,7 @@ int main()
     while (window.isOpen()) //--------- MAIN LOOP
     {
         std::cout << player.GetPlayerPosition().x<<"  " << player.GetPlayerPosition().y << "  Enemies:  "<<Enemies.size()<<"\n";
+    
         counter++;
         deltaTime = clock.restart().asSeconds();
         
@@ -82,45 +87,46 @@ int main()
                 case Event::Closed:
                     window.close();
                     break;
-                    
                 case Event::Resized:
                     ResizeView(window, view);
                     break;
-                    
                 default:
                     break;
             }
         }
         
-        //GENERATING
+        //GENERATING ENEMIES
         if (counter % enemySpawn == 0) {
             Enemy enemy(&enemyTexture, Vector2u(4, 4), 0.3f, MapWidth - 500, MapHeight - 500);
             Enemies.push_back(enemy);
             if(enemySpawn > 10)enemySpawn--;
         }
        
+        //CREATING BULLETS
         Time BulletTimer = BulletClock.getElapsedTime();
-        if (Keyboard::isKeyPressed(Keyboard::Space) and BulletTimer.asSeconds() >= 0.8){ //--------------CREATING BULLETS
+        if (Keyboard::isKeyPressed(Keyboard::Space) and BulletTimer.asSeconds() >= 0.5){
             Bullet bullet(10.0f, player.GetPlayerPosition().x, player.GetPlayerPosition().y, player.GetPlayerDir(), counter);
             Bullets.push_back(bullet);
             BulletClock.restart();
         }
         
-        //UPDATE
+        //UPDATES
         player.Update(deltaTime);
+        hud.Update(player, window);
         srand(time(NULL));
         for(auto &e : Enemies)e.Update(deltaTime, player);
         for(auto &b : Bullets)b.Update(deltaTime);
         for(auto &t : TextToDisplay)t.Update();
         
-        //COLLISION
+        //COLLISION FOR PLAYER AND BORDERS
         Time EnemyAtacksPlayer = EnemyAtackClock.getElapsedTime();
         LeftBorder.GetCollider().CheckCollision(player.GetCollider(), 1.f);
         RightBorder.GetCollider().CheckCollision(player.GetCollider(), 1.f);
         Botborder.GetCollider().CheckCollision(player.GetCollider(), 1.f);
         TopBorder.GetCollider().CheckCollision(player.GetCollider(), 1.f);
         
-        for(auto &e: Enemies){  //---------------------------------------------------COLLISION FOR ALL ENEMIES
+        //COLLISION FOR ALL ENEMIES
+        for(auto &e: Enemies){
             
             if(e.GetCollider().CheckCollision(player.GetCollider(), 0.5f) and EnemyAtacksPlayer.asSeconds() >= 0.6){
                 player.LowerHealth(e.GetDamage());
@@ -137,6 +143,8 @@ int main()
             
             for(auto &ee : Enemies)e.GetCollider().CheckCollision(ee.GetCollider(), 0.5f);
         }
+        
+        //COLLISION FOR ALL BULLETS
         for (auto &b : Bullets) {
             for (auto &e : Enemies)
                 if (b.GetCollider().CheckBulletCollision(e.GetCollider(), 0.5f)){
@@ -172,10 +180,23 @@ int main()
             if(TextToDisplay[i].ToDestroy()) TextToDisplay.erase(TextToDisplay.begin() + i);
             else TextToDisplay[i].DrawText(window);
         }
-        
+     
+        window.draw(hud.text);
         window.display();
+        
+        //GAME OVER CASE
+        if(player.GetHealth() <= 0){  //PLAYER IS DEAD
+            TextDisplay GameOver;
+            GameOver.text.setFont(font);
+            GameOver.text.setString("GAME OVER");
+            GameOver.text.setCharacterSize(100);
+            GameOver.text.setPosition(player.GetPlayerPosition().x - window.getSize().x / 3, player.GetPlayerPosition().y);
+            window.draw(GameOver.text);
+            window.display();
+            sleep(seconds(3));
+            window.close();
+        }
     }
-    
     return 0;
 }
 

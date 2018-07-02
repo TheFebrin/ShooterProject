@@ -1,4 +1,6 @@
 #pragma once
+#ifndef Entity_h
+
 #include<iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -28,3 +30,4 @@ private:
     
 };
 
+#endif

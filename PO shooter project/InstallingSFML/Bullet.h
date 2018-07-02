@@ -1,4 +1,6 @@
 #pragma once
+#ifndef Bullet_h
+
 #include<iostream>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
@@ -36,7 +38,7 @@ private:
     float maxspeed;
     bool destroy;
     
-    
-    
 };
+
+#endif
 

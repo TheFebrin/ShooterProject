@@ -1,3 +1,5 @@
+#pragma once
+#ifndef Enemy_h
 
 #include<iostream>
 #include <SFML/Audio.hpp>
@@ -42,3 +44,4 @@ private:
      Animation animation;
 };
 
+#endif
