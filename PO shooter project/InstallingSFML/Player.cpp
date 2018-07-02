@@ -3,7 +3,7 @@
 Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float height, float width)
 :animation(texture, imageCount, switchTime)
 {
-    Health = 100;
+    Health = 100; Damage = 50;
     PlayerSpeed = 980.f;
     row = 0;
     
@@ -79,4 +79,8 @@ int Player::GetHealth(){
 
 Vector2f Player::GetPlayerSize(){
     return PlayerSize;
+}
+
+int Player::GetDamage(){
+    return Damage;
 }

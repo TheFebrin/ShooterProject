@@ -25,6 +25,7 @@ public:
     void Update(float deltaTime);
     void DrawBullet(RenderWindow &win);
     bool ToDestroy();
+    void Destroy();
     
     Vector2f GetEnemyPosition() { return shape.getPosition(); };
     Collider GetCollider() { return Collider(shape); }

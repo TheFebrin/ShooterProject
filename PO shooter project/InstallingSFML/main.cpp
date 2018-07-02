@@ -42,8 +42,9 @@ int main()
     
     //TEXT
     Font font; font.loadFromFile(resourcePath() + "Fonts/sansation.ttf");
-    TextDisplay HealthText;
-    HealthText.text.setFont(font);
+    TextDisplay PlayerHealthText, EnemyHealthText;
+    PlayerHealthText.text.setFont(font);
+    EnemyHealthText.text.setFont(font); EnemyHealthText.text.setColor(Color::Blue);
     std::vector<TextDisplay> TextToDisplay;
    
     //PLAYER
@@ -123,9 +124,9 @@ int main()
             
             if(e.GetCollider().CheckCollision(player.GetCollider(), 0.5f) and EnemyAtacksPlayer.asSeconds() >= 0.6){
                 player.LowerHealth(e.GetDamage());
-                HealthText.text.setPosition(player.GetPlayerPosition().x - player.GetPlayerSize().x / 2, player.GetPlayerPosition().y - player.GetPlayerSize().y / 2);
-                HealthText.text.setString(std::to_string(e.GetDamage()));
-                TextToDisplay.push_back(HealthText);
+                PlayerHealthText.text.setPosition(player.GetPlayerPosition().x - player.GetPlayerSize().x / 2, player.GetPlayerPosition().y - player.GetPlayerSize().y / 2);
+                PlayerHealthText.text.setString(std::to_string(e.GetDamage()));
+                TextToDisplay.push_back(PlayerHealthText);
                 EnemyAtackClock.restart();
             }
             
@@ -137,8 +138,15 @@ int main()
             for(auto &ee : Enemies)e.GetCollider().CheckCollision(ee.GetCollider(), 0.5f);
         }
         for (auto &b : Bullets) {
-            for (unsigned int i = 0; i < Enemies.size(); i++)
-                if (b.GetCollider().CheckBulletCollision(Enemies[i].GetCollider(), 0.5f)) Enemies.erase(Enemies.begin() + i);
+            for (auto &e : Enemies)
+                if (b.GetCollider().CheckBulletCollision(e.GetCollider(), 0.5f)){
+                    b.Destroy();
+                    e.LowerHealth(player.GetDamage());
+                    if(e.GetHealth() <= 0)e.Destroy();
+                    EnemyHealthText.text.setString(std::to_string(player.GetDamage()));
+                    EnemyHealthText.text.setPosition(e.GetEnemyPosition().x, e.GetEnemyPosition().y);
+                    TextToDisplay.push_back(EnemyHealthText);
+                }
         }
         
         //WINDOW SETTINGS
@@ -151,14 +159,17 @@ int main()
         player.DrawPlayer(window);
         LeftBorder.Draw(window);  TopBorder.Draw(window); Botborder.Draw(window); RightBorder.Draw(window);
        
-        for(auto &e : Enemies)e.Draw(window); //---------------------------------DRAW ENEMIES
+        for(unsigned int i = 0; i < Enemies.size(); i++){  //---------------------------------DRAW / ERASE ENEMIES
+            if(Enemies[i].ToDestroy()) Enemies.erase(Enemies.begin() + i);
+            else Enemies[i].Draw(window);
+        }
         
         for (unsigned int i = 0; i < Bullets.size(); i++) {  //------------------DRAW / ERASE BULLETS
-            if (Bullets[i].ToDestroy())Bullets.erase(Bullets.begin() + i);
+            if (Bullets[i].ToDestroy()) Bullets.erase(Bullets.begin() + i);
             else Bullets[i].DrawBullet(window);
         }
-        for(unsigned int i=0; i < TextToDisplay.size(); i++){ //-------------------------DRAW / ERASE TEXT
-            if(TextToDisplay[i].ToDestroy())TextToDisplay.erase(TextToDisplay.begin() + i);
+        for(unsigned int i = 0; i < TextToDisplay.size(); i++){ //-------------------------DRAW / ERASE TEXT
+            if(TextToDisplay[i].ToDestroy()) TextToDisplay.erase(TextToDisplay.begin() + i);
             else TextToDisplay[i].DrawText(window);
         }
         

@@ -85,3 +85,19 @@ Vector2f Enemy::GetEnemyPosition() {
 int Enemy::GetDamage(){
     return Damage;
 }
+
+bool Enemy::ToDestroy(){
+    return destroy;
+}
+
+void Enemy::Destroy(){
+    destroy = true;
+}
+
+void Enemy::LowerHealth(int n){
+    Health -= n;
+}
+
+int Enemy::GetHealth(){
+    return Health;
+}

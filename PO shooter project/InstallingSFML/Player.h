@@ -27,9 +27,10 @@ public:
     
     int GetPlayerDir();
     void LowerHealth(int n); int GetHealth();
+    int GetDamage();
     
 private:
-    int Health, Armor;
+    int Health, Armor, Damage;
     float PlayerSpeed;
     int direction;
     

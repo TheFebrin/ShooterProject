@@ -42,3 +42,7 @@ void Bullet::DrawBullet(RenderWindow & win)
 bool Bullet::ToDestroy(){
     return destroy;
 }
+
+void Bullet::Destroy(){
+    destroy = true;
+}

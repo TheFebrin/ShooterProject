@@ -26,11 +26,15 @@ public:
     
     void Update(float deltaTime, Player player);
     int GetDamage();
+    void Destroy();
+    bool ToDestroy();
+    void LowerHealth(int n);
+    int GetHealth();
     
 private:
     float Speed;
     int Damage, Health;
-    bool isAlive;
+    bool destroy;
     
     unsigned int row;
     
