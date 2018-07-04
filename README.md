@@ -1,29 +1,33 @@
 # ShooterProject
 Project for object oriented programming
-
-Krótki opis
-
+<br>
+<h3>Krótki opis</h3>
+<br>
 Projekt, który przygotowaliśmy jest grą zręcznościową, jednoosobową i lokalną. Gra została zaprogramowana w języku C++. Dodatkowo użyliśmy zewnętrznej graficznej biblioteki SFML.
-
-Rozgrywka
-
-Podczas gry sterujemy naszą postacią na dwuwymiarowej mapie. (Gra jest w widoku „z góry”). Do poruszania się używamy przycisków AWSD oraz myszy. Położenie kursora na ekranie determinuje kierunek lotu pocisków, które możemy wystrzelić klikając lewy przycisk Myszy. Oprócz naszej postaci na ekranie znajdują się tzw. „wrogowie”, którzy poruszają się po mapie z prędkością podobną do prędkości gracza. Generowani są oni w losowych miejscach na mapie. Z dużej odległości nie widzą naszej postaci, ale poniżej pewnej zaczynają podążać w jej stronę. Gdy zbliżą się oni dostatcznie i dojdzie do kolizji – zostaną odebrane punkty życia naszej postaci. Gracz strzelając we wrogów może ich zlikwidować.
-
-Biblioteka SFML
-
+<br>
+<h3>Rozgrywka</h3>
+<br>
+Podczas gry sterujemy naszą postacią na dwuwymiarowej mapie. (Gra jest w widoku „z góry”). Do poruszania się używamy przycisków AWSD oraz spacji aby strzelać. Oprócz naszej postaci na ekranie znajdują się tzw. „wrogowie”, którzy poruszają się po mapie z prędkością podobną do prędkości gracza. Generowani są oni w losowych miejscach na mapie. Z dużej odległości nie widzą naszej postaci, ale poniżej pewnej zaczynają podążać w jej stronę. Gdy zbliżą się oni dostatcznie i dojdzie do kolizji – zostaną odebrane punkty życia naszej postaci. Gracz strzelając we wrogów może ich zlikwidować. Pojedyńczy strzał odbiera część życia wroga.
+<br>
+<h3>Biblioteka SFML</h3>
+<br>
 SFML to akronim od Simple Fast Multimedia Library. Jest to międzyplatformowa biblioteka, która dostarcza prosty interface do projektowania różnych aplikacji okienkowych. Została napisana w C++.  W projekcie używamy jej do utworzenia okna graficznego aplikacji i rysowania grafiki na ekranie w oparciu o zwracane przez odpowiedzialną za logikę część aplikacji wartości.
-
-Wykorzystane wzorce projektowe
-
+<br>
+<h3>Wykorzystane wzorce projektowe</h3>
+<br>
 Cała aplikacja oparta jest na wzorcu obiektowym. Program składa się z modułów – klas, które są odpowiedzialne za poszczególne jego elementy. Osobną klasę ma gracz, wróg, pocisk i inne. Bardziej szczegółowo o klasach i zależnościach między nimi można przeczytać w rodziale: „Klasy  w projekcie” oraz „Diagramy UML”.
-
-Klasy w projekcie
-
-Animation
-
-Bullet
-
-Przechowuje pozycję i prędkość pocisku. 
+<br>
+<h3>Klasy w projekcie</h3>
+<br>
+<h3>Animation</h3>
+<br>
+Klasa odpowiedzialna za animacje Gracza oraz wrogów. Animacja ma miejsce przez stałe zmienianie wyświetlanego obrazka w zależności w którą strone porusza się dany obiekt.
+Metody:
+Update(); zmienia aktualnie animowane pole tekstury gracza lub wroga
+<br>
+<h3>Bullet</h3>
+<br>
+Klasa przechowująca wszystkie parametry pocisku wystrzelonego przez gracza.
 Metody: 
 Update() zmienia pozycję pocisku.
 Metoda DrawBullet() renderuje pocisk na ekranie gry.
