@@ -28,7 +28,7 @@ int main()
 {
     int counter = 0;
     float deltaTime = 0.0f;
-    Clock clock, BulletClock, EnemyAtackClock;
+    Clock clock, BulletClock, EnemyAtackClock, EnemySpawn;
     
     //WINDOW
     RenderWindow window(VideoMode(ScreenX, ScreenY), "Shooter", Style::Close | Style::Resize);
@@ -67,7 +67,6 @@ int main()
     Texture enemyTexture;
     enemyTexture.loadFromFile(resourcePath() + "Images/EnemySprite.png");
     std::vector<Enemy>Enemies;
-    int enemySpawn = 100;
     
     //BULLETS
     std::vector<Bullet>Bullets;
@@ -96,10 +95,11 @@ int main()
         }
         
         //GENERATING ENEMIES
-        if (counter % enemySpawn == 0) {
+        Time EnemySpawnTime = EnemySpawn.getElapsedTime();
+        if (EnemySpawnTime.asSeconds() >= 1.0f) {
             Enemy enemy(&enemyTexture, Vector2u(4, 4), 0.3f, MapWidth - 500, MapHeight - 500);
             Enemies.push_back(enemy);
-            if(enemySpawn > 10)enemySpawn--;
+            EnemySpawn.restart();
         }
        
         //CREATING BULLETS

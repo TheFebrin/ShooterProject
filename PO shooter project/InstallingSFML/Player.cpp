@@ -5,7 +5,7 @@ Player::Player(Texture* texture, Vector2u imageCount, float switchTime, float he
 {
     Health = 100; Damage = 2;
     BulletRelease = 0.5f;
-    PlayerSpeed = 980.f;
+    PlayerSpeed = 200.f;
     row = 0;
     
     PlayerSize.x = width; PlayerSize.y = height;
