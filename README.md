@@ -38,7 +38,8 @@ Ważniejsze metody:
 </ul>
 <br>
 <h3>Collider</h3>
-Obsługuje kolizje pomiędzy obiektami na mapie.
+Obsługuje kolizje pomiędzy obiektami na mapie. Im cięższy obiekt, tym większy współczynnik tarcia, więc gracz kolidując
+z takim obiektem może go przesuwać z różną szybkością i na odwrót. Gracz, przeciwnik, pocisk i każdy inny obiekt dla którego chcemy wykryc kolizję ma w swojej klasie swój Collider.
 
 Ważniejsze metody: 
 <ul>
@@ -80,10 +81,17 @@ Ważniejsze metody:
 <h3>Entity</h3>
 Klasa zawierająca podstawowe rodzaje tekstur, takie jak RectangleShape, czy Sprite. Dziedziczy z niej Enemy, Bullet oraz TextDisplay
 <br>
+<h3>HUD</h3>
+Klasa wyświetlająca panel gry i informacje o graczu takie jak np. życie
+<br>
+<h3>Platform</h3>
+Klasa odpowiadająca za generowanie bloków, i innych elementów terenu utrudniających poruszanie. Wykrywalna jest kolizja gracza i takiego obiektu. Granice mapy są obiektami klasy Platform.
 
-
-
-
-
+Ważniejsze metody: 
+<ul>
+<li>GetCollider() pobiera collider obiektu </li> 
+<li>Draw() renderuje na ekran</li>
+</ul>
+<br>
 
 
