@@ -21,14 +21,14 @@ Cała aplikacja oparta jest na wzorcu obiektowym. Program składa się z moduł�
 <h3>Klasy w projekcie: </h3>
 <br>
 <h3>Animation</h3>
-
 Klasa odpowiedzialna za animacje Gracza oraz wrogów. Animacja ma miejsce przez stałe zmienianie wyświetlanego obrazka w zależności w którą strone porusza się dany obiekt.
 Ważniejsze metody:
+
 Update(); zmienia aktualnie animowane pole tekstury gracza lub wroga
 <br>
 <h3>Bullet</h3>
-
 Klasa przechowująca wszystkie parametry pocisku wystrzelonego przez gracza.
+
 Ważniejsze metody: 
 <ul>
 <li>Update() zmienia pozycję pocisku </li>
@@ -37,43 +37,27 @@ Ważniejsze metody:
 </ul>
 <br>
 <h3>Collider</h3>
-<br>
 Obsługuje kolizje pomiędzy obiektami na mapie.
 
-Metody:
-CheckCollision() zwraca true jeśli obiekty nachodzą na siebie na mapie i false w przeciwnym wypadku.
-Move() przemieszcza obiekt wstecz w przypadku wykrycia kolizji przez CheckCollision().
+Ważniejsze metody: 
+<ul>
+<li>CheckCollision() zwraca true jeśli obiekty nachodzą na siebie na mapie i false w przeciwnym wypadku (metoda AABB) <li>
+<li>Move() przemieszcza obiekt wstecz w przypadku wykrycia kolizji przez CheckCollision()</li>
+</ul>
+<br>
+<h3>Enemy</h3>
+Zawiera informacje o pozycji wroga na mapie, o tym czy jest żywy, o jego prędkości, życiu, ataku, wymiarach itp.
 
-Enemy
-
-Zawiera informacje o pozycji wroga na mapie, o tym czy jest żywy, o jego prędkości i o wymiarach tekstury.
-
-Metody:
-Update() aktualizuje pozycję wroga na mapie w zależności od wciśniętych przycisków.
-DrawEnemy() renderuje teksturę wroga w oknie gry.
-GetCollider() zwraca wymiary i pozycję tekstury, która potencjalnie może kolidować z innymi obiektami na mapie.
-
-Game
-
-Obsługuje cały przebieg gry. Wykonuje wszystkie zdarzenia podczas gry.
-
-Metody:
-RunGame() dopóki okno gry jest otwarte wywołuje  i wykonuje potrzebne eventy, aktualizuje pozycje wszystkich obiektów na mapie oraz ryzuje je wraz ze scenerią na ekranie.
-IsRunning() funkcja boolowska, która sprawdza czy gra jest aktualnie uruchomiona.
-ProcessEvents() nasłuchuje eventów wychodzących od użytkownika takich jak naciśnięcie przycisku lub zamknięcie okna gry.
-HandlePlayerInput() decyduje, w którą stronę poruszyć gracza w zależności od wciśniętych przycisków na klawiaturze.
-Render() renderuje gracza na ekranie oraz wyświetla okno gry.
-
-GenerateRandomNumber
-
-Generuje pseudolosową liczbę, na podstawie której zostanie utworzona „losowa” pozycja wroga.
-
-Metody:
-generateRandom() generuje liczbę pseudolosową.
-
-
-Player
-
+Ważniejsze metody: 
+<ul>
+<li>Update() aktualizuje pozycję wroga na mapie, jeżeli gracz jest daleko porusza się losowo, wpp goni gracza </li>
+<li>DrawEnemy() renderuje teksturę wroga w oknie gry </li>
+<li>GetCollider() zwraca wymiary i pozycję tekstury, która potencjalnie może kolidować z innymi obiektami na mapie.</li>
+<li>Destroy() zaznacza, że danego wroga trzeba usunąć, bo został zabity </li>
+<li>LowerHealth() gdy gracz zaatakuje wroga obniża życie wroga </li>
+</ul>
+<br>
+<h3>Player</h3>
 Podobnie jak wróg. Gracz ma swoją pozycję, prędkość i punkty życia.
 
 Metody:
