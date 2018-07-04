@@ -28,7 +28,7 @@ Ważniejsze metody:
 </ul>
 <br>
 <h3>Bullet</h3>
-Klasa przechowująca wszystkie parametry pocisku wystrzelonego przez gracza
+Klasa przechowująca wszystkie parametry pocisku wystrzelonego przez gracza.
 
 Ważniejsze metody: 
 <ul>
@@ -70,7 +70,7 @@ Ważniejsze metody:
 </ul>
 <br>
 <h3>TextDisplay</h3>
-Klasa odpowiada za wyświetlanie tekstu na ekran np. punktów zdrowia, czy obrażeń
+Klasa odpowiada za wyświetlanie tekstu na ekran np. punktów zdrowia, czy obrażeń.
 
 Ważniejsze metody: 
 <ul>
@@ -79,10 +79,10 @@ Ważniejsze metody:
 </ul>
 <br>
 <h3>Entity</h3>
-Klasa zawierająca podstawowe rodzaje tekstur, takie jak RectangleShape, czy Sprite. Dziedziczy z niej Enemy, Bullet oraz TextDisplay
+Klasa zawierająca podstawowe rodzaje tekstur, takie jak RectangleShape, czy Sprite. Dziedziczy z niej Enemy, Bullet oraz TextDisplay.
 <br>
 <h3>HUD</h3>
-Klasa wyświetlająca panel gry i informacje o graczu takie jak np. życie
+Klasa wyświetlająca panel gry i informacje o graczu takie jak np. życie.
 <br>
 <h3>Platform</h3>
 Klasa odpowiadająca za generowanie bloków, i innych elementów terenu utrudniających poruszanie. Wykrywalna jest kolizja gracza i takiego obiektu. Granice mapy są obiektami klasy Platform.
