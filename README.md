@@ -30,10 +30,11 @@ Update(); zmienia aktualnie animowane pole tekstury gracza lub wroga
 
 Klasa przechowująca wszystkie parametry pocisku wystrzelonego przez gracza.
 Ważniejsze metody: 
-
+<ul>
 <li>Update() zmienia pozycję pocisku </li>
 <li>DrawBullet() renderuje pocisk na ekranie gry</li>
-</li>Destroy() daje programowi znać, że pocisk należy już usunąć </li>
+<li>Destroy() daje programowi znać, że pocisk należy już usunąć </li>
+</ul>
 <br>
 <h3>Collider</h3>
 <br>
