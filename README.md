@@ -19,7 +19,6 @@ SFML to akronim od Simple Fast Multimedia Library. Jest to międzyplatformowa bi
 Cała aplikacja oparta jest na wzorcu obiektowym. Program składa się z modułów – klas, które są odpowiedzialne za poszczególne jego elementy. Osobną klasę ma gracz, wróg, pocisk i inne. Bardziej szczegółowo o klasach i zależnościach między nimi można przeczytać w rodziale: „Klasy  w projekcie” oraz „Diagramy UML”.
 <br>
 <h3>Klasy w projekcie: </h3>
-<br>
 <h3>Animation</h3>
 Klasa odpowiedzialna za animacje Gracza oraz wrogów. Animacja ma miejsce przez stałe zmienianie wyświetlanego obrazka w zależności w którą strone porusza się dany obiekt.
 Ważniejsze metody:
@@ -41,7 +40,7 @@ Obsługuje kolizje pomiędzy obiektami na mapie.
 
 Ważniejsze metody: 
 <ul>
-<li>CheckCollision() zwraca true jeśli obiekty nachodzą na siebie na mapie i false w przeciwnym wypadku (metoda AABB) <li>
+<li>CheckCollision() zwraca true jeśli obiekty nachodzą na siebie na mapie i false w przeciwnym wypadku (metoda AABB) </li>
 <li>Move() przemieszcza obiekt wstecz w przypadku wykrycia kolizji przez CheckCollision()</li>
 </ul>
 <br>
@@ -52,20 +51,33 @@ Ważniejsze metody:
 <ul>
 <li>Update() aktualizuje pozycję wroga na mapie, jeżeli gracz jest daleko porusza się losowo, wpp goni gracza </li>
 <li>DrawEnemy() renderuje teksturę wroga w oknie gry </li>
-<li>GetCollider() zwraca wymiary i pozycję tekstury, która potencjalnie może kolidować z innymi obiektami na mapie.</li>
+<li>GetCollider() zwraca wymiary i pozycję tekstury, która potencjalnie może kolidować z innymi obiektami na mapie</li>
 <li>Destroy() zaznacza, że danego wroga trzeba usunąć, bo został zabity </li>
 <li>LowerHealth() gdy gracz zaatakuje wroga obniża życie wroga </li>
 </ul>
 <br>
 <h3>Player</h3>
-Podobnie jak wróg. Gracz ma swoją pozycję, prędkość i punkty życia.
+Podobnie jak wróg. Gracz ma swoją pozycję, prędkość, obrażenia, życie itp.
 
-Metody:
-Update() aktualizuje pozycję gracza i animuje jego ruch.
-DrawPlayer() renderuje teksturę gracza na mapie w oparciu o jego pozycję.
+Ważniejsze metody: 
+<ul>
+<li>Update() aktualizuje pozycję gracza przechwytując wciśnięte klawicze i animuje jego ruch</li>
+<li>DrawPlayer() renderuje teksturę gracza na mapie w oparciu o jego pozycję</li>
+<li>LowerHealth() gdy wróg zaatakuje gracza, ten traci punkty zdrowia </li>
+</ul>
+<br>
+<h3>TextDisplay</h3>
+Klasa odpowiada za wyświetlanie tekstu na ekran np. punktów zdrowia, czy obrażeń
 
-
-Scene Node
+Ważniejsze metody: 
+<ul>
+<li>Update() zmiana pozycji tekstu </li> 
+<li>DrawText() renderuje tekst na ekran</li>
+</ul>
+<br>
+<h3>Entity</h3>
+Klasa zawierająca podstawowe rodzaje tekstur, takie jak RectangleShape, czy Sprite. Dziedziczy z niej Enemy, Bullet oraz TextDisplay
+<br>
 
 
 
