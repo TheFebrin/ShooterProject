@@ -21,15 +21,16 @@ Cała aplikacja oparta jest na wzorcu obiektowym. Program składa się z moduł�
 <h3>Klasy w projekcie: </h3>
 <br>
 <h3>Animation</h3>
-<br>
+
 Klasa odpowiedzialna za animacje Gracza oraz wrogów. Animacja ma miejsce przez stałe zmienianie wyświetlanego obrazka w zależności w którą strone porusza się dany obiekt.
 Ważniejsze metody:
 Update(); zmienia aktualnie animowane pole tekstury gracza lub wroga
 <br>
 <h3>Bullet</h3>
-<br>
+
 Klasa przechowująca wszystkie parametry pocisku wystrzelonego przez gracza.
 Ważniejsze metody: 
+
 <li>Update() zmienia pozycję pocisku </li>
 <li>DrawBullet() renderuje pocisk na ekranie gry</li>
 </li>Destroy() daje programowi znać, że pocisk należy już usunąć </li>
