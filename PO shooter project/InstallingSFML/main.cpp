@@ -38,7 +38,7 @@ int main()
     //HUD
     HUD hud;
     Font font; font.loadFromFile(resourcePath() + "Fonts/sansation.ttf"); //--- GAME FONT
-    hud.text.setFont(font);
+    hud.text.setFont(font); hud.score.setFont(font);
     
     //MAP
     Texture mapTexture;
@@ -104,7 +104,7 @@ int main()
        
         //CREATING BULLETS
         Time BulletTimer = BulletClock.getElapsedTime();
-        if (Keyboard::isKeyPressed(Keyboard::Space) and BulletTimer.asSeconds() >= 0.5){
+        if (Keyboard::isKeyPressed(Keyboard::Space) and BulletTimer.asSeconds() >= player.GetBulletRelease()){
             Bullet bullet(10.0f, player.GetPlayerPosition().x, player.GetPlayerPosition().y, player.GetPlayerDir(), counter);
             Bullets.push_back(bullet);
             BulletClock.restart();
@@ -181,6 +181,8 @@ int main()
             else TextToDisplay[i].DrawText(window);
         }
      
+//        hud.score.setPosition(player.GetPlayerPosition().x , player.GetPlayerPosition().y + window.getSize().y / 3);
+//        window.draw(hud.score);
         window.draw(hud.text);
         window.display();
         
@@ -190,7 +192,7 @@ int main()
             GameOver.text.setFont(font);
             GameOver.text.setString("GAME OVER");
             GameOver.text.setCharacterSize(100);
-            GameOver.text.setPosition(player.GetPlayerPosition().x - window.getSize().x / 3, player.GetPlayerPosition().y);
+            GameOver.text.setPosition(player.GetPlayerPosition().x - window.getSize().x / 10, player.GetPlayerPosition().y);
             window.draw(GameOver.text);
             window.display();
             sleep(seconds(3));

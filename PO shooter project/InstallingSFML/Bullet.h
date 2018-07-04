@@ -29,7 +29,6 @@ public:
     bool ToDestroy();
     void Destroy();
     
-    Vector2f GetEnemyPosition() { return shape.getPosition(); };
     Collider GetCollider() { return Collider(shape); }
     
 public:

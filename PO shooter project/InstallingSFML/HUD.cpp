@@ -14,6 +14,11 @@ HUD::HUD()
     text.setCharacterSize(30);
     text.setString("100");
     text.setPosition(10, 10);
+    
+    score.setColor(Color(255 , 120, 0));
+    score.setCharacterSize(30);
+    score.setString("SCORE");
+    score.setPosition(10, 10);
 }
 
 void HUD::Update(Player player, RenderWindow &win)

@@ -28,7 +28,7 @@ public:
     HUD();
     void Update(Player player, RenderWindow &win);
     
-    
+    Text score;
 };
 
 #endif /* HUD_hpp */

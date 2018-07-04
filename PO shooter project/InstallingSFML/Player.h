@@ -30,11 +30,13 @@ public:
     int GetPlayerDir();
     void LowerHealth(int n); int GetHealth();
     int GetDamage();
+    float GetBulletRelease();
     
 private:
-    int Health, Armor, Damage;
-    float PlayerSpeed;
+    int Health, Damage;
+    float PlayerSpeed, BulletRelease;
     int direction;
+    
     
     Vector2f PlayerSize;
     RectangleShape body;
