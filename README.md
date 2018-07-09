@@ -18,6 +18,15 @@ SFML to akronim od Simple Fast Multimedia Library. Jest to międzyplatformowa bi
 <br>
 Cała aplikacja oparta jest na wzorcu obiektowym. Program składa się z modułów – klas, które są odpowiedzialne za poszczególne jego elementy. Osobną klasę ma gracz, wróg, pocisk i inne. Bardziej szczegółowo o klasach i zależnościach między nimi można przeczytać w rodziale: „Klasy  w projekcie” oraz „Diagramy UML”.
 <br>
+<h4>The Facade pattern</h4>
+W naszym projekcie klasa Entity jest bazą dla m. in. klas Player, Bullet i Enemy. Pomaga to w lepszym zorganizowaniu projektu i zapobieka skomplikowanym powiązaniom.
+<h4>Composite pattern</h4>
+Jest to wzorzec, którego można by użyć w naszym projekcie i uprościć nieco struktuę. Metody LowerHealth i Destroy są wykorzystywane we wszystkich klasach odpowiadajacych za postacie w grze. Można by łączyć sprawdzanie stanu zdrowia obiektu z kolizją z pociskiem i nie używać do tego żadnej instrukcji warunkowej, a jedynie przekazać przez konstruktor do klasy implementującej metodę Update(). Wtedy w jednym momencie aktualizowana byłaby nie tylko pozycja, ale również punkty życia i nie trzeba byłoby tego specyfikować osobno.
+
+<h4>Interfeace segregation pattern</h4>
+W naszym projekcie powielone są wielokrotnie metody Update(), Draw() itp. Można by stworzyć interface'y, które niejako "posegregowałyby" klasy o podobnych metodach dzięki czemu uzyskalibyśmy większy porządek w projekcie.
+
+
 <h3>Klasy w projekcie: </h3>
 <h3>Animation</h3>
 Klasa odpowiedzialna za animacje Gracza oraz wrogów. Animacja ma miejsce przez stałe zmienianie wyświetlanego obrazka w zależności w którą strone porusza się dany obiekt.
@@ -30,7 +39,7 @@ Ważniejsze metody:
 <h3>Bullet</h3>
 Klasa przechowująca wszystkie parametry pocisku wystrzelonego przez gracza.
 
-Ważniejsze metody: 
+Ważniejsze metody:
 <ul>
 <li>Update() zmienia pozycję pocisku </li>
 <li>DrawBullet() renderuje pocisk na ekranie gry</li>
@@ -41,7 +50,7 @@ Ważniejsze metody:
 Obsługuje kolizje pomiędzy obiektami na mapie. Im cięższy obiekt, tym większy współczynnik tarcia, więc gracz kolidując
 z takim obiektem może go przesuwać z różną szybkością i na odwrót. Gracz, przeciwnik, pocisk i każdy inny obiekt dla którego chcemy wykryc kolizję ma w swojej klasie swój Collider.
 
-Ważniejsze metody: 
+Ważniejsze metody:
 <ul>
 <li>CheckCollision() zwraca true jeśli obiekty nachodzą na siebie na mapie i false w przeciwnym wypadku (metoda AABB) </li>
 <li>Move() przemieszcza obiekt wstecz w przypadku wykrycia kolizji przez CheckCollision()</li>
@@ -50,7 +59,7 @@ Ważniejsze metody:
 <h3>Enemy</h3>
 Zawiera informacje o pozycji wroga na mapie, o tym czy jest żywy, o jego prędkości, życiu, ataku, wymiarach itp.
 
-Ważniejsze metody: 
+Ważniejsze metody:
 <ul>
 <li>Update() aktualizuje pozycję wroga na mapie, jeżeli gracz jest daleko porusza się losowo, wpp goni gracza </li>
 <li>DrawEnemy() renderuje teksturę wroga w oknie gry </li>
@@ -62,7 +71,7 @@ Ważniejsze metody:
 <h3>Player</h3>
 Podobnie jak wróg. Gracz ma swoją pozycję, prędkość, obrażenia, życie itp.
 
-Ważniejsze metody: 
+Ważniejsze metody:
 <ul>
 <li>Update() aktualizuje pozycję gracza przechwytując wciśnięte klawicze i animuje jego ruch</li>
 <li>DrawPlayer() renderuje teksturę gracza na mapie w oparciu o jego pozycję</li>
@@ -72,9 +81,9 @@ Ważniejsze metody:
 <h3>TextDisplay</h3>
 Klasa odpowiada za wyświetlanie tekstu na ekran np. punktów zdrowia, czy obrażeń.
 
-Ważniejsze metody: 
+Ważniejsze metody:
 <ul>
-<li>Update() zmiana pozycji tekstu </li> 
+<li>Update() zmiana pozycji tekstu </li>
 <li>DrawText() renderuje tekst na ekran</li>
 </ul>
 <br>
@@ -87,11 +96,9 @@ Klasa wyświetlająca panel gry i informacje o graczu takie jak np. życie.
 <h3>Platform</h3>
 Klasa odpowiadająca za generowanie bloków, i innych elementów terenu utrudniających poruszanie. Wykrywalna jest kolizja gracza i takiego obiektu. Granice mapy są obiektami klasy Platform.
 
-Ważniejsze metody: 
+Ważniejsze metody:
 <ul>
-<li>GetCollider() pobiera collider obiektu </li> 
+<li>GetCollider() pobiera collider obiektu </li>
 <li>Draw() renderuje na ekran</li>
 </ul>
 <br>
-
-
